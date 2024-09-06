@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <title>{% block title %}All Projects{% endblock title %}</title>
+
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static 'css/soft-design-system.css' %}" rel="stylesheet" />
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body>
+    <header>
+        {% include 'includes/navigation.html' %}
+    </header>
+
+    <main class="mx-lg-5 mx-md-3 mx-sm-1 px-lg-5 px-md-3 px-sm-0">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer>
+        {% include 'includes/footer.html' %}
+    </footer>
+
+    {% include 'includes/scripts.html' %}
+    {% block javascripts %}{% endblock javascripts %}
+</body>
+
+</html>

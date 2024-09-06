@@ -1,0 +1,85 @@
+.uk-card-media-top img {
+    height: 200px;
+    object-fit: cover;
+}
+
+
+  .featuredProject-image {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+    height: 100vh; 
+    overflow: hidden; 
+    margin-right: 1000px; 
+  }
+  .featuredProject-image img {
+    width: 100%; 
+    max-height: 100%; 
+    object-fit: cover; 
+    margin-right: 1000px;
+  }
+  .carousel-caption {
+    bottom: 45%;
+    z-index: 2;
+  }
+  .carousel-indicators {
+    bottom: 20%;
+  }
+
+
+
+  /* Custom styles for the projects page */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card-img-top {
+  border-radius: 0.75rem 0.75rem 0 0;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #666;
+}
+
+.text-muted {
+  color: #999;
+}
+
+.progress {
+  height: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.progress-bar {
+  transition: width 0.6s ease;
+}
+
+.badge {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px;
+  }
+}

@@ -1,0 +1,11 @@
+{% autoescape off %}
+  Hi {{ user.username }},
+
+  Please click the link below to confirm your email address and complete the registration process:
+
+  http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+    
+    This link will expire in 24 hours.
+
+  Thank you for registering with us!
+{% endautoescape %}

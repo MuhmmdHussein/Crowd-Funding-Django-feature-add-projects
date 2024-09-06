@@ -1,0 +1,171 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %} Home Page {% endblock title %}
+
+{% block stylesheets %}
+<style>
+</style>
+{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+
+<section class="carousel-section py-5">
+  <div class="container">
+    <div id="highestRatedCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        {% if highest_rated_projects %}
+          {% for project in highest_rated_projects %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{% static 'assets/img/caro3.jpg' %}" class="d-block w-100" alt="{{ project.title }}">
+              <div class="carousel-caption d-none d-md-block">
+                <h1>{{ project.title }}</h1>
+                <p>{{ project.get_donations }} EGP raised</p>
+              </div>
+            </div>
+            
+            <!-- Add other images for each project here -->
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{% static 'assets/img/caro1.jpg' %}" class="d-block w-100" alt="{{ project.title }}">
+              <div class="carousel-caption d-none d-md-block">
+                <h1>{{ project.title }}</h1>
+                <p>{{ project.get_donations }} EGP raised</p>
+              </div>
+            </div>
+
+
+          {% empty %}
+            <div class="carousel-item active">
+              <img src="{% static 'assets/img/' %}" class="d-block w-100" alt="No Projects">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>No High Rated Projects Available</h5>
+              </div>
+            </div>
+
+
+          {% endfor %}
+        {% else %}
+          <div class="carousel-item active">
+            <img src="{% static 'assets/img/caro1.jpg' %}" class="d-block w-100" alt="No Projects">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>No High Rated Projects Available</h5>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#highestRatedCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#highestRatedCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Counter -->
+<section class="pt-3 pb-4" id="count-stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 z-index-2 border-radius-xl mt-n8 mx-auto py-3 blur shadow-blur">
+        <div class="row">
+          <div class="col-md-4 position-relative">
+            <div class="p-3 text-center">
+              <h3 class="text-gradient text-primary">
+                <span id="state1">{{ donors_count }}</span>+
+              </h3>
+              <h5 class="mt-3">Donors</h5>
+              <p class="text-sm">
+                People of different ages are welcome to donate
+              </p>
+            </div>
+            <hr class="vertical dark" />
+          </div>
+          <div class="col-md-4 position-relative">
+            <div class="p-3 text-center">
+              <h3 class="text-gradient text-primary">
+                <span id="state2">{{ projects_count }}</span>+
+              </h3>
+              <h5 class="mt-3">Projects</h5>
+              <p class="text-sm">Various Projects that deserve to be donated</p>
+            </div>
+            <hr class="vertical dark" />
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 text-center">
+              <h3 class="text-gradient text-primary">
+                <span id="state3">{{ reviews_count }}</span>+
+              </h3>
+              <h5 class="mt-3">Reviews</h5>
+              <p class="text-sm">Feel free to rate projects and give us feedback</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- List Projects -->
+<section class="my-5 py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Latest Projects -->
+      <div class="col-lg-6 ms-auto me-auto p-lg-2 mt-lg-0 mt-4">
+        <div class="card card-background card-background-mask-primary tilt">
+          <div class="full-background" style="
+              background-image: url('https://images.unsplash.com/photo-1579389083395-4507e98b5e67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80');
+          "></div>
+          <div class="card-body pt-5 text-center">
+            <h2 class="text-white up mb-4">
+              <i class="fa-solid fa-list-check mx-3"></i>Latest Projects
+            </h2>
+            <ul class="text-left">
+              {% for project in latest_projects %}
+                <li>
+                  <a href="{% url 'project_details' project.id %}" class="text-light font-weight-bold">
+                    {{ project.title|title }}
+                  </a>
+                </li>
+              {% empty %}
+                <h5 class="text-light text-center">No Projects Found</h5>
+              {% endfor %}
+            </ul>
+            <a href="{% url 'all_projects' %}" class="btn btn-outline-white mt-3 btn-round">View All</a>
+          </div>
+        </div>
+      </div>
+      <!-- Featured Projects -->
+      <div id="featured" class="col-lg-6 mt-lg-0 mt-4 p-lg-2">
+        <div class="card card-background card-background-mask-primary tilt">
+          <div class="full-background" style="
+              background-image: url('https://images.unsplash.com/photo-1602506468430-7ed6604cb8e4?ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZlYXR1cmVkJTIwcHJvamVjdHxlbnwwfHx8fDE2Nzg1NzEwMzM&ixlib=rb-1.2.1');
+          "></div>
+          <div class="card-body pt-5 text-center">
+            <h2 class="text-white up mb-4">
+              <i class="fa-solid fa-star mx-3"></i>Featured Projects
+            </h2>
+            <ul class="text-left">
+              {% for project in featured_projects %}
+                <li>
+                  <a href="{% url 'project_details' project.id %}" class="text-light font-weight-bold">
+                    {{ project.title|title }}
+                  </a>
+                </li>
+              {% empty %}
+                <h5 class="text-light text-center">No Projects Found</h5>
+              {% endfor %}
+            </ul>
+            <a href="{% url 'all_projects' %}" class="btn btn-outline-white mt-3 btn-round">View All</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

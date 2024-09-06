@@ -1,0 +1,144 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Projects {% endblock title %}
+
+{% block stylesheets %}
+<style>
+  .card {
+    border: none;
+    border-radius: 0.75rem;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .card-img-top {
+    border-radius: 0.75rem 0.75rem 0 0;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  .text-muted {
+    color: #999;
+  }
+
+  .progress {
+    height: 0.75rem;
+    border-radius: 0.5rem;
+  }
+
+  .progress-bar {
+    transition: width 0.6s ease;
+  }
+
+  .badge {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .card-img-top {
+      height: 150px;
+    }
+  }
+
+  .container {
+    max-width: 1200px;
+  }
+
+  .category-page-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .category-project-content {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .category-project-content a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .category-project-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .tags_container a {
+    font-size: 0.875rem;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container py-5">
+  <h3 class="text-center mb-4">
+    {% block project_type %}{% endblock project_type %}
+    <span class="text-primary">{{ title|title }}</span>
+  </h3>
+
+  <div class="row">
+    {% for project in all_projects %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm rounded-lg" style="height: 100%;">
+        <a href="{% url 'project_details' project.id %}" class="text-decoration-none">
+          <img src="{{ project.pictures.url }}" alt="project-img" class="card-img-top">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{ project.title|title }}</h5>
+          <p class="card-text text-muted mb-2">
+            <i class="fa fa-calendar mr-1"></i> Ends by: {{ project.end_time }}
+          </p>
+          <p class="card-text">{{ project.details|truncatewords:20 }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">
+              {{ project.get_donations }} L.E.
+              <span class="text-muted mx-2">raised of {{ project.total_target }} L.E. goal</span>
+            </h6>
+          </div>
+          <div class="progress mt-2">
+          </div>
+          <a href="{% url 'project_details' project.id %}" class="btn btn-outline-secondary btn-sm mt-3">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Tag Search Section -->
+  {% block extra_content %}
+  <div class="mt-5">
+    <h3 class="text-center mb-4">
+      {% block extra_content_title %}{% endblock extra_content_title %}
+      <span class="text-primary">{{ title_tags|title }}</span>
+    </h3>
+    <div class="d-flex justify-content-center flex-wrap">
+      {% for tag in tags %}
+      <a href="{% url 'get_tag' tag.id %}" class="badge bg-light text-dark py-2 px-3 rounded mx-2 mb-2">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endblock extra_content %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-BO5B1nS8pP+g2D8nU6K6pP5i7zD/s2yY8r6TLi3M7W6uJ6fUl6Mb8cB+8ot5GF5E" crossorigin="anonymous"></script>
+{% endblock content %}

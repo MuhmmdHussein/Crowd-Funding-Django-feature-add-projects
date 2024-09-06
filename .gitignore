@@ -1,0 +1,22 @@
+*.pyc
+*.DS_Store
+*.egg*
+.vscode
+/dist/
+/.idea
+/docs/_build/
+/node_modules/
+build/
+env
+/staticfiles/
+
+#src
+*.sqlite*
+
+#.env
+node_modules
+.venv/
+venv
+venv/
+ db.sqlite3
+# db

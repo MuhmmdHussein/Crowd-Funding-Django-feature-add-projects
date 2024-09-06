@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}All Projects{% endblock title %}
+
+{% block stylesheets %}
+<style>
+  .card {
+    margin-bottom: 1.5rem;
+    border: none; /* Remove default border */
+    border-radius: 0.75rem; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Consistent height */
+    object-fit: cover; /* Maintain aspect ratio */
+    object-position: center; /* Center image */
+    border-radius: 0.75rem 0.75rem 0 0; /* Rounded top corners */
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+    background-color: #ffffff; /* White background */
+    border-radius: 0 0 0.75rem 0.75rem; /* Rounded bottom corners */
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: bold; /* Bold title */
+    color: #333333; /* Dark text color */
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #666666; /* Lighter text color for description */
+  }
+  
+  .card-text small {
+    color: #999999; /* Muted color for additional details */
+  }
+  
+  .card-img-top, .card-body {
+    border-radius: 0.75rem; /* Consistent rounded corners */
+  }
+  
+  /* Placeholder styles */
+  .placeholder-img {
+    background: #e0e0e0; /* Placeholder background */
+    height: 200px; /* Consistent height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999999; /* Placeholder text color */
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .card-img-top {
+      height: 150px; /* Adjust height for smaller screens */
+    }
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if projects %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% else %}
+                        <div class="card-img-top placeholder-img">No Image</div>
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted">Target: ${{ project.total_target }}</small></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No Projects Found</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
